@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Registration</title>
+
+    <link rel="stylesheet" href="../css/loginTitle.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="h1">National Covid Management System</div>
+    <div class="ul">
+        <div class="li"><a href="">Home</a></div>
+        <div class="li"><a href="">Hospital</a></div>
+        <div class="li"><a href="">Doctor</a></div>
+        <div class="li"><a href="">Patient</a></div>
+        <div class="li" style="float:right"><a href="">LOGOUT</a></div>
+    </div>
+
+    <div class="box">
+        <h1>Patient Registration</h1>
+        <form name="patientRegistration" action="">
+            <table>
+                <tr>
+                    <td width="45%">First Name</td>
+                    <td><input type="text" name="firstName" placeholder="Enter Your First Name" required></td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td><input type="text" name="lastName" placeholder="Enter Your Last Name" required></td>
+                </tr>
+                <tr>
+                    <td>District</td>
+                    <td><select name="district" style="color: gray" required>
+                        <option>Please Select District</option>
+                        <option>D1</option>
+                        <option>D2</option>
+                        <option>D3</option>
+                        <option>D4</option>
+                        <option>D5</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>X Coordinate</td>
+                    <td><input type="number" name="xCoordinate" placeholder="X Coordinate of Location" required step="0"></td>
+                </tr>
+                <tr>
+                    <td>Y Coordinate</td>
+                    <td><input type="number" name="xCoordinate" placeholder="X Coordinate of Location" required></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td><select name="gender" style="color: gray" required>
+                        <option>Please Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contact</td>
+                    <td><input type="number" name="contact" placeholder="Mobile or Land" required></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="email" placeholder="Enter Your Email" required></td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td><input type="number" name="age" required placeholder="Your Age"></td>
+                </tr>
+                <tr>
+                    <td align="right"><input type="submit" name="buttonRegister" value="Register"></td>
+                    <td align="center"><input type="reset" value="Clear" style="width: 70%;"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</body>
+</html>

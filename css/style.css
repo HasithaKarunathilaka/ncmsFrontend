@@ -1,0 +1,75 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    background-color: #a8feff;
+    background: url(../Images/log.jpg);
+    background-size: cover;
+    background-repeat: round;
+}
+
+.box{
+    width: 400px;
+    /*height: 420px;*/
+    background: rgba(4, 0, 20, 0.8);
+    color: #fff;
+    top: 290px;
+    left:50%;
+    position: relative;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 20px 20px;
+    border-radius: 10px;
+
+}
+h1{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+.box td{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    color: #fff;
+
+}
+.box input[type="text"], input[type="password"], input[type="email"], input[type="number"], select{
+    border: none;
+    border-bottom: 1px solid #00fff0;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 3px;
+    color: #fff;
+    font-size: 16px;
+}
+.box input[type="submit"], input[type="reset"]{
+    width: 80%;
+    margin-top: 30px;
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #18514a;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.box input[type="reset"]:hover{
+    cursor: pointer;
+    background: #00fff0;
+    color: #000;
+}
+.box input[type="submit"]:hover{
+    cursor: pointer;
+    background: #00fff0;
+    color: #000;
+}

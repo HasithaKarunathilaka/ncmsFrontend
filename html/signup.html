@@ -1,0 +1,95 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/signup.css">
+    <link rel="stylesheet" href="../css/loginTitle.css">
+
+    <title>Sign Up</title>
+
+    <script language="javascript">
+
+        function dataValidation(){
+            if(document.userSignUp.userName.value=='') {
+                alert("Please enter your Email Address");
+                return false;
+            }
+            if(document.userSignUp.name.value=='') {
+                alert("Please enter your Full Name");
+                return false;
+            }
+            if(document.userSignUp.password.value=='') {
+                alert("Please enter your Password");
+                return false;
+            }
+            if (document.userSignUp.pw.value.length<8){
+                alert("Password should be at least 8 characters");
+                return false;
+            }
+            if(document.userSignUp.cpw.value=='') {
+                alert("Please enter Confirm Password");
+                return false;
+            }
+            if(document.userSignUp.pw.value!=document.user_signup_form.cpw.value) {
+                alert("Password and Confirmation does not match");
+                return false;
+            }
+            else{
+                return confirm;
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+    <div class="h1">National Covid Management System</div>
+    <div class="ul">
+        <div class="li"><a href="index.php">Home</a></div>
+        <div class="li" style="float:right"><a href="login.html">LOGIN</a></div>
+
+        <div class="li"><a href="help.php">Help</a></div>
+
+    </div>
+
+    <div class="signBox">
+        <form action="" name="userSignUp" onsubmit="return dataValidation()" method="POST">
+            <h1>Sign Up</h1>
+            <table>
+                <tr>
+                    <td width="50%">User Type</td>
+                    <td>
+                        <select name = "userType" style="color: gray">
+                            <option selected>User</option>
+                            <option>MOH</option>
+                            <option>Hospital</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td><input type="email" name="userName" placeholder="Enter You Email" required></td>
+                </tr>
+                <tr>
+                    <td>Full Name</td>
+                    <td><input type="text" name="name" placeholder="Your Full Name" required></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="password" placeholder="Password" required></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" name="cpw" placeholder="Re-Enter Password" required></td>
+                </tr>
+            </table><br>
+            <div style="text-align: center;"><input type="submit" name="submit" value="Sign Up"></div>
+        </form>
+        <p style="font-weight: normal; text-align: center">Already have account?
+            <a href="login.html">&nbsp; Login</a>
+        </p>
+    </div>
+<!--    <br>-->
+<!--    <p></p>-->
+<!--    <br>-->
+
+</body>
+</html>
