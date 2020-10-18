@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/loginTitle.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <title>Doctor Registration</title>
+</head>
+<body>
+    <div class="h1">National Covid Management System</div>
+    <div class="ul">
+        <div class="li"><a href="">Home</a></div>
+        <div class="li"><a href="">Hospital</a></div>
+        <div class="li" style="background-color: #18514a"><a href="registerDoctor.html">Doctor</a></div>
+        <div class="li"><a href="patientRegister.html">Patient</a></div>
+        <div class="li" style="float:right"><a href="">LOGOUT</a></div>
+    </div>
+    <div class="box">
+        <h1>Doctor Registration</h1>
+        <form name="doctorRegistration" action="">
+            <table>
+                <tr>
+                    <td width="45%">Full Name</td>
+                    <td><input type="text" name="fullName" placeholder="Enter Your Full Name" required></td>
+                </tr>
+                <tr>
+                    <td>Hospital ID</td>
+                    <td><input type="text" name="hospitalId" placeholder="Working Hospital ID" required></td>
+                </tr>
+                <tr>
+                    <td>Director State</td>
+                    <td>Yes <input type="radio" name="isDirector" value="1" required style="margin-top: 10px; margin-right: 50px"> No <input type="radio" name="isDirector" value="0" required></td>
+                </tr>
+                <tr>
+                    <td align="right"><input type="submit" name="buttonRegister" value="Register"></td>
+                    <td align="center"><input type="reset" value="Clear" style="width: 70%;"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</body>
+</html>

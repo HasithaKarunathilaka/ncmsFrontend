@@ -2,6 +2,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../css/signup.css">
     <link rel="stylesheet" href="../css/loginTitle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <title>Sign Up</title>
 
@@ -20,7 +21,7 @@
                 alert("Please enter your Password");
                 return false;
             }
-            if (document.userSignUp.pw.value.length<8){
+            if (document.userSignUp.password.value.length<8){
                 alert("Password should be at least 8 characters");
                 return false;
             }
@@ -28,11 +29,14 @@
                 alert("Please enter Confirm Password");
                 return false;
             }
-            if(document.userSignUp.pw.value!=document.user_signup_form.cpw.value) {
+            if(document.userSignUp.password.value!=document.userSignUp.cpw.value) {
                 alert("Password and Confirmation does not match");
                 return false;
             }
             else{
+                // alert("IF");
+                loadDoc();
+                // test();
                 return confirm;
             }
         }
@@ -57,10 +61,10 @@
                 <tr>
                     <td width="50%">User Type</td>
                     <td>
-                        <select name = "userType" style="color: gray">
-                            <option selected>User</option>
-                            <option>MOH</option>
-                            <option>Hospital</option>
+                        <select name = "userType" id="userType" style="color: gray">
+                            <option selected value="user">User</option>
+                            <option value="moh">MOH</option>
+                            <option value="hospital">Hospital</option>
                         </select>
                     </td>
                 </tr>
@@ -90,6 +94,89 @@
 <!--    <br>-->
 <!--    <p></p>-->
 <!--    <br>-->
+    <script type="text/javascript">
+        // function test(){
+        //     alert("Test");
+        //     $(document).ready(function () {
+        //         $('#userSignUp').submit(function (e) {
+        //             e.preventDefault();
+        //             let form = $(this);
+        //             loadDoc(form)
+        //         });
+        //     });
+        // }
+
+        function loadDoc(){
+            // alert("LoadDoc");
+            var userName = document.userSignUp.userName.value;
+            var password = document.userSignUp.password.value;
+            var name = document.userSignUp.name.value;
+            var userType = $("#userType").val();
+            if(userType == "user"){
+                var moh = 0;
+                var hospital = 0;
+
+            }else if (userType == "moh"){
+                var moh = 1;
+                var hospital = 0;
+            }else {
+                var moh = 0;
+                var hospital = 1;
+            }
+
+            $.ajax({
+                url: 'http://localhost:8080//user?type=signup&userName='+userName+'&password='+password+'&name='+name+'&moh='+moh+'&hospital='+hospital,
+                type: "POST",
+                dataType: "json",
+                success: (data) => {
+                    alert('Patient Registered successfully');
+                    console.log(data);
+                    alert(JSON.stringify(data));
+                },
+                error: err =>{
+                    alert('Patient Registration Error : \n' + err);
+                    console.error(err);
+                },
+                // contentType: "application/json"
+            });
+
+            // $.ajax({
+            //     url: 'http://localhost:8080//user?type=signup&userName=document.userSignUp.userName.value&password=12345678&name=ceena&moh=0&hospital=0',
+            //     type: "POST",
+            //     dataType: "json",
+            //     success: function (data, status, xhr) {
+            //         console.log('Patient Registered successfully');
+            //         alert('Patient Registered successfully');
+            //     },
+            //     error: function (jqXhr, textStatus, errorMessage) {
+            //         console.error(errorMessage);
+            //         alert('Patient Registration Error : '+ errorMessage);
+            //     },
+            //     // contentType: "application/json"
+            // });
+
+
+            // $.ajax({
+            //     url: '127.0.0.1:8080//user?type=signup&userName=Ceena&password=12345678&name=ceena&moh=0&hospital=0',
+            //     method: 'POST',
+            //     data: data,
+            //     success: function(d, s, e){
+            //         $(".waiting-sign").removeClass("show-element");
+            //         if (d.status){
+            //             callback(d.status, d.msg, d.data);
+            //             alert('Patient Registered successfully');
+            //         }
+            //         alert('Out of IF');
+            //     },
+            //     error: function(d, s, e){
+            //         $(".waiting-sign").removeClass("show-element");
+            //         callback(s, e, "");
+            //         alert('Error');
+            //     },
+            //     contentType: "application/json"
+            // });
+        }
+    </script>
 
 </body>
 </html>

@@ -63,13 +63,13 @@ h1{
     font-size: 20px;
     border-radius: 10px;
 }
-.box input[type="reset"]:hover{
+.box input[type="reset"]:hover , input[type="submit"]:hover{
     cursor: pointer;
     background: #00fff0;
     color: #000;
 }
-.box input[type="submit"]:hover{
-    cursor: pointer;
-    background: #00fff0;
-    color: #000;
-}
+/*.box input[type="submit"]:hover{*/
+/*    cursor: pointer;*/
+/*    background: #00fff0;*/
+/*    color: #000;*/
+/*}*/
