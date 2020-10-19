@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="../css/loginTitle.css">
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="h1">National Covid Management System</div>
@@ -19,7 +20,7 @@
 
     <div class="box">
         <h1>Patient Registration</h1>
-        <form name="patientRegistration" action="">
+        <form name="patientRegistration" id="patientRegistration" action="" method="POST" onsubmit="registerPatient()">
             <table>
                 <tr>
                     <td width="45%">First Name</td>
@@ -47,7 +48,7 @@
                 </tr>
                 <tr>
                     <td>Y Coordinate</td>
-                    <td><input type="number" name="xCoordinate" placeholder="X Coordinate of Location" required></td>
+                    <td><input type="number" name="yCoordinate" placeholder="Y Coordinate of Location" required></td>
                 </tr>
                 <tr>
                     <td>Gender</td>
@@ -77,6 +78,50 @@
             </table>
         </form>
     </div>
+
+    <script type="text/javascript">
+
+        function registerPatient() {
+            // alert("LoadDoc");
+            var firstName = document.patientRegistration.firstName.value;
+            var lastName = document.patientRegistration.lastName.value;
+            var district = document.patientRegistration.district.value;
+            var locationX = document.patientRegistration.xCoordinate.value;
+            var locationY = document.patientRegistration.yCoordinate.value;
+            var gender = document.patientRegistration.gender.value;
+            var contact = document.patientRegistration.contact.value;
+            var email = document.patientRegistration.email.value;
+            var age = document.patientRegistration.age.value;
+            // var formData = $("#patientRegistration").serializeArray();
+            // var userName = document.userSignUp.userName.value;
+            var URL = 'http://localhost:8080//registerPatient?firstName='+firstName+'&lastName='+lastName+'&district='+district+'&locationX='+locationX+'&locationY='+locationY+'&gender='+age+'&contact='+contact+'&email='+email+'&age='+age;
+            $.post(URL,
+                function (data, textStatus, jqXHR) {
+                    alert(data);
+                    alert("Reg Ok");
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR + errorThrown + textStatus);
+                alert("Failed");
+            });
+
+            // $.ajax({
+            //         url: 'http://localhost:8080//registerPatient?firstName=Testig&lastName=DONT&district=Panadura&locationX=4&locationY=350&gender=female&contact=1234567890&email=test@TEST.com&age=34',
+            //         type: "POST",
+            //         dataType: "json",
+            //         success: function (data, textStatus, jqXHR) {
+            //             console.log(data);
+            //             alert('Patient Registered successfully \n ' + data+ ' == \n' + jqXHR + ' == \n' +textStatus  );
+            //             alert(JSON.stringify(data));
+            //         },
+            //         error: function (jqXHR, textStatus, errorThrown) {
+            //             alert('Patient Registration Error : \n'+ errorThrown + ' == \n' + jqXHR + ' == \n' +textStatus );
+            //             console.error(errorThrown);
+            //         },
+            //         // contentType: "application/json"
+            //     });
+
+        }
+    </script>
 
 </body>
 </html>
