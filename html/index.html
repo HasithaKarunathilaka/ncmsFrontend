@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NCMS</title>
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <link rel="stylesheet" href="../css/loginTitle.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../jquery/js.cookie-2.2.1.min.js"></script>
+    <script src="../jquery/jquery.min.js"></script>
+    <script src="../jquery/jquery.easing.min.js"></script>
+    <script src="../toaster/toastr.min.js"></script>
+    <script src="../js/patient.js"></script>
+</head>
+<body>
+<div class="h1">National Covid Management System</div>
+<div class="ul">
+    <div class="li" style="background-color: #18514a"><a href="index.php">Home</a></div>
+    <div class="li" style="float:right"><a href="patientRegister.html">Register</a></div>
+    <div class="li" style="float:right"><a href="login.html">LOGIN</a></div>
+
+</div>
+<div class="tableBox" style="left: 50%">
+    <h1>Country Level</h1>
+    <center>
+        <table id="countryLevel">
+            <thead>
+                <tr></tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </center>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        getStatistic();
+    });
+</script>
+
+</body>
+</html>

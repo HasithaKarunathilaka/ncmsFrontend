@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NCMS</title>
+    <link rel="stylesheet" href="../../css/loginTitle.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../jquery/js.cookie-2.2.1.min.js"></script>
+    <script src="../../js/patient.js"></script>
+    <script src="../../js/hospital.js"></script>
+    <script src="../../jquery/jquery.min.js"></script>
+    <script src="../../jquery/jquery.easing.min.js"></script>
+    <script src="../../toaster/toastr.min.js"></script>
+</head>
+<body>
+<div class="h1">National Covid Management System</div>
+<div class="ul">
+    <div class="li" style="background-color: #18514a"><a href="doctorDashboard.html">Home</a></div>
+    <div class="li"><a href="patientDetails.html">Patient</a></div>
+    <div class="li"><a href="doctorList.html">Doctor</a></div>
+    <div class="li" style="float:right"><a href="../login.html">LOGOUT</a></div>
+</div>
+
+    <div class="tableBox">
+        <h1>Patients Details</h1>
+        <table  id="patientsDetailsList">
+            <thead>
+                <tr>
+                    <th style="width: 75%">Patient ID</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tableBox" style="left: 60%; top: 0px">
+        <h1>Hospital Statistic</h1>
+        <table id="hospitalStatistic" style="width: 100%">
+            <thead>
+            <tr>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+<!--    <script type="text/javascript">-->
+<!--        // let hospitalId = "37718435-9688-4605-9f8c-380a7484429e";-->
+<!--        // let doctorId = "doctor";-->
+<!--        // let userType = "doctor"-->
+<!--        // $(document).ready(function () {-->
+<!--        //     getOnlinePatientsDetailsList(userType, hospitalId);-->
+<!--        // });-->
+<!--    </script>-->
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Severity Level</h2>
+            </div>
+            <div class="modal-body">
+                    <select name="severityLevel" id="severityLevel" required>
+                        <option>Low</option>
+                        <option> Moderate</option>
+                        <option> Critical</option>
+                    </select>
+            </div>
+            <div class="modal-footer">
+                <center><button name="confirm" id="confirm">CONFIRM</button></center>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="myModalConfirm" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="closeDischarge">&times;</span>
+                <center><h2>Are You Sure?</h2></center>
+            </div>
+            <div class="modal-body">
+                <p>Do You Want to Discharge this Patient?</p>
+            </div>
+            <div class="modal-footer">
+                <center>
+                    <button name="yes" id="btnYes">Yes</button>
+                    <button name="yes" id="btnNo">No</button>
+                </center>
+            </div>
+        </div>
+
+</div>
+
+    <script type="text/javascript">
+
+        let hospitalId = localStorage.getItem("hospitalId");
+        let doctorId = localStorage.getItem("userId");
+        let userType = localStorage.getItem("userType");
+        // alert(userType);
+        $(document).ready(function () {
+            getOnlinePatientsDetailsList(userType, hospitalId);
+            getHospitalDetials(hospitalId);
+        });
+
+        function readyToAdmit(rowNo){
+            var cellData = document.getElementById("patientsDetailsList").rows[rowNo].cells[0].innerHTML;
+            var modal = document.getElementById("myModal");
+            var btn = document.getElementById("confirm");
+            var span = document.getElementsByClassName("close")[0];
+            modal.style.display = "block";
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+            btn.onclick = function() {
+                var severityLevel = document.getElementById("severityLevel").value;
+                $(document).ready(function () {
+                    confirmAdmit(doctorId, cellData, severityLevel);
+                    modal.style.display = "none";
+                });
+            }
+
+        }
+
+        function readyToDischarge(rowNo){
+            var cellData = document.getElementById("patientsDetailsList").rows[rowNo].cells[0].innerHTML;
+            var modal = document.getElementById("myModalConfirm");
+            var btnYes = document.getElementById("btnYes");
+            var btnNo = document.getElementById("btnNo");
+            var span = document.getElementsByClassName("closeDischarge")[0];
+            modal.style.display = "block";
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+            btnYes.onclick = function() {
+                $(document).ready(function () {
+                    confirmDischarge(doctorId, cellData);
+                });
+                modal.style.display = "none";
+            }
+            btnNo.onclick = function() {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

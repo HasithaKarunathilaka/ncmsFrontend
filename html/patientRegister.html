@@ -3,24 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient Registration</title>
-
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
     <link rel="stylesheet" href="../css/loginTitle.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../jquery/js.cookie-2.2.1.min.js"></script>
+<!--    <script src="../js/patient.js"></script>-->
+<!--    <script src="../js/hospital.js"></script>-->
+    <script src="../jquery/jquery.min.js"></script>
+    <script src="../jquery/jquery.easing.min.js"></script>
+    <script src="../toaster/toastr.min.js"></script>
+
 </head>
 <body>
     <div class="h1">National Covid Management System</div>
     <div class="ul">
-        <div class="li"><a href="">Home</a></div>
-        <div class="li"><a href="">Hospital</a></div>
-        <div class="li"><a href="registerDoctor.html">Doctor</a></div>
-        <div class="li" style="background-color: #18514a"><a href="">Patient</a></div>
-        <div class="li" style="float:right"><a href="patientRegister.html">LOGOUT</a></div>
+        <div class="li"><a href="index.html">Home</a></div>
+        <div class="li" style="float:right; background-color: #18514a"><a href="patientRegister.html">Register</a></div>
+        <div class="li" style="float:right"><a href="login.html">LOGIN</a></div>
     </div>
 
     <div class="box">
         <h1>Patient Registration</h1>
-        <form name="patientRegistration" id="patientRegistration" action="" method="POST" onsubmit="registerPatient()">
+        <form name="patientRegistration" id="patientRegistration" action="" method="POST">
             <table>
                 <tr>
                     <td width="45%">First Name</td>
@@ -72,7 +77,7 @@
                     <td><input type="number" name="age" required placeholder="Your Age"></td>
                 </tr>
                 <tr>
-                    <td align="right"><input type="submit" name="buttonRegister" value="Register"></td>
+                    <td align="right"><input type="submit" name="buttonRegister" id="buttonRegister" value="Register"></td>
                     <td align="center"><input type="reset" value="Clear" style="width: 70%;"></td>
                 </tr>
             </table>
@@ -80,9 +85,22 @@
     </div>
 
     <script type="text/javascript">
+        $(document).ready(function () {
+        //     var btnSubmit = document.getElementById("buttonRegister")
+        //     btnSubmit.onclick = function(){
+        //         // alert("hhhh");
+        //         registerPatient();
+        //     }
+            $('#patientRegistration').submit(function (e) {
+                // alert("hhhh");
+                // e.preventDefault();
+                // let form = $(this);
+                registerPatient();
+            });
+        });
 
         function registerPatient() {
-            // alert("LoadDoc");
+            // alert("Sadasd");
             var firstName = document.patientRegistration.firstName.value;
             var lastName = document.patientRegistration.lastName.value;
             var district = document.patientRegistration.district.value;
@@ -92,36 +110,68 @@
             var contact = document.patientRegistration.contact.value;
             var email = document.patientRegistration.email.value;
             var age = document.patientRegistration.age.value;
-            // var formData = $("#patientRegistration").serializeArray();
-            // var userName = document.userSignUp.userName.value;
-            var URL = 'http://localhost:8080//registerPatient?firstName='+firstName+'&lastName='+lastName+'&district='+district+'&locationX='+locationX+'&locationY='+locationY+'&gender='+age+'&contact='+contact+'&email='+email+'&age='+age;
-            $.post(URL,
-                function (data, textStatus, jqXHR) {
-                    alert(data);
-                    alert("Reg Ok");
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR + errorThrown + textStatus);
-                alert("Failed");
+            // alert(lastName + age);
+            $.ajax({
+                type: "POST",
+                url: 'http://localhost:8080/registerPatient?firstName='+firstName+'&lastName='+lastName+'&district='+district+'&locationX='+locationX+'&locationY='+locationY+'&gender='+gender+'&contact='+contact+'&email='+email+'&age='+age ,
+                success: function (data, status, xhr) {
+                    // Cookies.set('patientId', data.patientId);
+                    // console.log('Patient registered successfully');
+                    alert("Patient id is " + data.patientId);
+                    window.location.replace("login.html");
+                },
+                error: function (jqXhr, textStatus, errorMessage) {
+                    console.error(errorMessage);
+                    alert("Registration Fail");
+                }
             });
-
-            // $.ajax({
-            //         url: 'http://localhost:8080//registerPatient?firstName=Testig&lastName=DONT&district=Panadura&locationX=4&locationY=350&gender=female&contact=1234567890&email=test@TEST.com&age=34',
-            //         type: "POST",
-            //         dataType: "json",
-            //         success: function (data, textStatus, jqXHR) {
-            //             console.log(data);
-            //             alert('Patient Registered successfully \n ' + data+ ' == \n' + jqXHR + ' == \n' +textStatus  );
-            //             alert(JSON.stringify(data));
-            //         },
-            //         error: function (jqXHR, textStatus, errorThrown) {
-            //             alert('Patient Registration Error : \n'+ errorThrown + ' == \n' + jqXHR + ' == \n' +textStatus );
-            //             console.error(errorThrown);
-            //         },
-            //         // contentType: "application/json"
-            //     });
-
+            alert("Registration Successful");
         }
     </script>
+
+<!--    <script type="text/javascript">-->
+
+<!--        function registerPatient() {-->
+<!--            // alert("LoadDoc");-->
+<!--            var firstName = document.patientRegistration.firstName.value;-->
+<!--            var lastName = document.patientRegistration.lastName.value;-->
+<!--            var district = document.patientRegistration.district.value;-->
+<!--            var locationX = document.patientRegistration.xCoordinate.value;-->
+<!--            var locationY = document.patientRegistration.yCoordinate.value;-->
+<!--            var gender = document.patientRegistration.gender.value;-->
+<!--            var contact = document.patientRegistration.contact.value;-->
+<!--            var email = document.patientRegistration.email.value;-->
+<!--            var age = document.patientRegistration.age.value;-->
+<!--            // var formData = $("#patientRegistration").serializeArray();-->
+<!--            // var userName = document.userSignUp.userName.value;-->
+<!--            var URL = 'http://localhost:8080//registerPatient?firstName='+firstName+'&lastName='+lastName+'&district='+district+'&locationX='+locationX+'&locationY='+locationY+'&gender='+gender+'&contact='+contact+'&email='+email+'&age='+age;-->
+<!--            $.post(URL,-->
+<!--                function (json, textStatus, jqXHR){-->
+<!--                    alert(json(Response));-->
+<!--                    alert("Reg Ok");-->
+<!--                }).fail(function (jqXHR, textStatus, errorThrown){-->
+<!--                    alert(jqXHR + errorThrown + textStatus);-->
+<!--                    alert("Failed");-->
+<!--            });-->
+
+<!--            // $.ajax({-->
+<!--            //         url: 'http://localhost:8080//registerPatient?firstName=Testig&lastName=DONT&district=Panadura&locationX=4&locationY=350&gender=female&contact=1234567890&email=test@TEST.com&age=34',-->
+<!--            //         type: "POST",-->
+<!--            //         dataType: "json",-->
+<!--            //         success: function (data, textStatus, jqXHR) {-->
+<!--            //             console.log(data);-->
+<!--            //             alert('Patient Registered successfully \n ' + data+ ' == \n' + jqXHR + ' == \n' +textStatus  );-->
+<!--            //             alert(JSON.stringify(data));-->
+<!--            //         },-->
+<!--            //         error: function (jqXHR, textStatus, errorThrown) {-->
+<!--            //             alert('Patient Registration Error : \n'+ errorThrown + ' == \n' + jqXHR + ' == \n' +textStatus );-->
+<!--            //             console.error(errorThrown);-->
+<!--            //         },-->
+<!--            //         // contentType: "application/json"-->
+<!--            //     });-->
+
+<!--        }-->
+<!--    </script>-->
 
 </body>
 </html>

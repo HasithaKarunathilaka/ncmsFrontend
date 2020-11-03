@@ -125,11 +125,11 @@
             }
             var URL = 'http://localhost:8080//user?type=signup&userName='+userName+'&password='+password+'&name='+name+'&moh='+moh+'&hospital='+hospital;
             $.post(URL,
-                function (data, textStatus, jqXHR) {
-                    alert(data);
+                function (json, textStatus, jqXHR) {
+                    alert(json);
                     alert("Reg Ok");
             }).fail(function (jqXHR, textStatus, errorThrown){
-                alert(jqXHR + errorThrown + textStatus);
+                alert(jqXHR );
                 alert("Failed");
             });
 

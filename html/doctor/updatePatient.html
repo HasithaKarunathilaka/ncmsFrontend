@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NCMS</title>
+    <link rel="stylesheet" href="../../css/loginTitle.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../jquery/js.cookie-2.2.1.min.js"></script>
+    <script src="../../js/patient.js"></script>
+    <script src="../../js/hospital.js"></script>
+    <script src="../../jquery/jquery.min.js"></script>
+    <script src="../../jquery/jquery.easing.min.js"></script>
+    <script src="../../toaster/toastr.min.js"></script>
+</head>
+<body>
+
+    <div class="h1">National Covid Management System</div>
+    <div class="ul">
+        <div class="li"><a href="doctorDashboard.html">Home</a></div>
+        <div class="li" style="background-color: #18514a"><a href="patientDetails.html">Patient</a></div>
+        <div class="li"><a href="">Doctor</a></div>
+        <div class="li" style="float:right"><a href="../login.html">LOGOUT</a></div>
+    </div>
+    <center>
+    <div class="tableBox" id="tableBox" style="top: 300px; left: 15%">
+        <h1>Update Details</h1>
+        <form name="patientUpdate" id="patientUpdate" action="" method="PUT">
+            <table>
+                <tr>
+                    <td width="50%">First Name</td>
+                    <td><input type="text" name="firstName" id="firstName" placeholder="" required></td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td><input type="text" name="lastName" id="lastName" placeholder="" required></td>
+                </tr>
+                <tr>
+                    <td>District</td>
+                    <td><input type="text" name="district" id="district"  required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>X Coordinate</td>
+                    <td><input type="text" name="xCoordinate" id="xCoordinate" placeholder="" required step="0"></td>
+                </tr>
+                <tr>
+                    <td>Y Coordinate</td>
+                    <td><input type="text" name="yCoordinate" id="yCoordinate" placeholder="" required></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td><input type="text" name="gender" id="gender" required></td>
+                </tr>
+                <tr>
+                    <td>Contact</td>
+                    <td><input type="text" name="contact" id="contact" placeholder="" required></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" name="email" id="email" placeholder="" required></td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td><input type="text" name="age" id="age" required placeholder=""></td>
+                </tr>
+                <tr>
+                    <td>Severity Level</td>
+                    <td><input type="text" name="severityLevel" id="severityLevel" required placeholder=""></td>
+                </tr>
+                <tr>
+                    <td>Admit Date</td>
+                    <td><input type="date" name="admitDate" id="admitDate" required placeholder=""></td>
+                </tr>
+                <tr>
+                    <td align="right"><input type="button" name="btnUpdate" id="btnUpdate" value="UPDATE"></td>
+                    <td align="center"><a href="patientDetails.html"><input type="button" name="btnBack" id="btnBack" value="BACK" ></a></td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+    </center>
+<br><br>
+<p><br></p>
+
+    <script type="text/javascript">
+
+        var test = window.location.href;
+        var splitDetails = test.split("=");
+        // alert(splitDetails[1]);
+        var patientDetails = splitDetails[1].split(",");
+        // alert(patientDetails[11]);
+        $('#firstName').val(patientDetails[1]);
+        $('#lastName').val(patientDetails[2]);
+        $('#district').val(patientDetails[3]);
+        $('#xCoordinate').val(patientDetails[4]);
+        $('#yCoordinate').val(patientDetails[5]);
+        $('#gender').val(patientDetails[6]);
+        $('#contact').val(patientDetails[7]);
+        $('#email').val(patientDetails[8]);
+        $('#age').val(patientDetails[9]);
+        $('#severityLevel').val(patientDetails[10]);
+        $('#admitDate').val(patientDetails[11]);
+        var id = patientDetails[0];
+        // alert(id);
+
+        var btnUpdate = document.getElementById("btnUpdate");
+        btnUpdate.onclick = function() {
+            $(document).ready(function () {
+                $.ajax({
+                    type: "PUT",
+                    url:'http://localhost:8080/registerPatient/?admitState=update&id='+id+'&firstName='+document.getElementById("firstName").value+'&lastName='+document.getElementById("lastName").value+'&district='+document.getElementById("district").value+'&xCoordinate='+document.getElementById("xCoordinate").value+'&yCoordinate='+document.getElementById("yCoordinate").value+'&gender='+document.getElementById("gender").value+'&contact='+document.getElementById("contact").value+'&email='+document.getElementById("email").value+'&age='+document.getElementById("age").value+'&severityLevel='+document.getElementById("severityLevel").value+'&admitDate='+document.getElementById("admitDate").value ,
+                    success: function (data, status, xhr) {
+                        if(data.Response == "Update Success"){
+                            console.log('Update successfully');
+                            toastr.success('patient Update successfully', 'Save Complete');
+                            window.location.replace("patientDetails.html");
+                            alert("Patient Update Successfully");
+                        }else if (data.Response == "Update Error"){
+                            console.log('Not Updated');
+                            toastr.success('patient update Error', 'Incomplete');
+                            alert("Patient Not Updated");
+                            // window.location.replace("updat.html");
+                        }else {
+                            console.log('Error');
+                            toastr.success('Error', 'Incomplete');
+                            alert("Error. Something Wrong..!");
+                            window.location.replace("doctorDashboard.html");
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorMessage) {
+                        toastr.error('Something went wrong! ' + errorMessage, 'Error')
+                    }
+                });
+            });
+        }
+
+   </script>
+
+</body>
+</html>

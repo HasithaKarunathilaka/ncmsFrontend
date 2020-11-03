@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NCMS</title>
+    <link rel="stylesheet" href="../../css/loginTitle.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../jquery/js.cookie-2.2.1.min.js"></script>
+    <script src="../../js/queue.js"></script>
+    <script src="../../jquery/jquery.min.js"></script>
+    <script src="../../jquery/jquery.easing.min.js"></script>
+    <script src="../../toaster/toastr.min.js"></script>
+</head>
+<body>
+<div class="h1">National Covid Management System</div>
+<div class="ul">
+    <div class="li" style="background-color: #18514a"><a href="mohDashboard.html">Home</a></div>
+<!--    <div class="li"><a href="hospitals.html">Hospital</a></div>-->
+<!--    <div class="li"><a href="doctors.html">Doctor</a></div>-->
+    <div class="li"><a href="patientsDetailsList.html">Patient</a></div>
+    <div class="li" style="float:right"><a href="../login.html">LOGOUT</a></div>
+</div>
+<div class="tBox" style="top: 200px">
+    <input type="button" name="newHospital" id="newHospital" style="width: 50% ;float:left" value="Build Hospital">
+    <br><p></p>
+    <h1>Patient Queue</h1>
+    <center>
+        <table id="patientQueue">
+            <thead>
+            <th>#</th>
+            <th>Patient Id</th>
+            <th>Queue Id</th>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </center>
+</div>
+
+<script type="text/javascript">
+    // let hospitalId = localStorage.getItem("hospitalId");
+    // let doctorId = localStorage.getItem("userId");
+    // let accessBy = localStorage.getItem("userType");
+    $(document).ready(function () {
+        getQueueDetails();
+    });
+    function disableButton(count){
+        if(count > 4){
+            document.getElementById("newHospital").style.visibility = 'visible';
+        }else {
+            document.getElementById("newHospital").style.visibility = 'hidden';
+        }
+
+    }
+    var btnNewHospital = document.getElementById("newHospital");
+    btnNewHospital.onclick = function() {
+        window.location.href="registerHospital.html";
+    }
+</script>
+
+</body>
+</html>

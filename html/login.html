@@ -1,40 +1,94 @@
 
 <html lang="en">
 <head>
+    <script type="text/javascript">
+        localStorage.removeItem("userType");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("hospitalId");
+    </script>
+
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="../css/login.css">
     <link rel="stylesheet" href="../css/loginTitle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../jquery/js.cookie-2.2.1.min.js"></script>
+    <script src="../jquery/jquery.min.js"></script>
+    <script src="../jquery/jquery.easing.min.js"></script>
+    <script src="../toaster/toastr.min.js"></script>
+    <script src="../js/patient.js"></script>
 </head>
 <body>
 
     <div class="h1">National Covid Management System</div>
     <div class="ul">
-        <div class="li"><a href="index.php">Home</a></div>
-        <div class="li" style="float:right"><a href="login.html">LOGIN</a></div>
-
-        <div class="li"><a href="help.php">Help</a></div>
+        <div class="li"><a href="index.html">Home</a></div>
+        <div class="li" style="float:right"><a href="patientRegister.html">Register</a></div>
+        <div class="li" style="float:right; background-color: #18514a"><a href="login.html">LOGIN</a></div>
 
     </div>
 <div class="loginBox">
 
     <h1>User Login</h1>
 
-    <form name="user_login_form" action="" method="POST">
+    <form name="user_login_form" id="user_login_form" action="" method="POST">
 
         <p>Username</p>
-        <input type="text" name="username" placeholder="Enter Your E-mail" required>
+        <input type="text" name="userName" id="userName" placeholder="Enter Your ID" required>
 
         <p>Password</p>
-        <input type="password" name="password" placeholder="Enter Password" required>
+        <input type="password" name="password" id="password" placeholder="Enter Email" required>
 
         <input type="submit" name="login" value="Login">
 
     </form>
 
-    <p style="font-weight: normal; text-align: center">Don't have account?
-        <a href="signup.html">&nbsp; Sign Up</a>
-    </p>
+<!--    <p style="font-weight: normal; text-align: center">Don't have account?-->
+<!--        <a href="signup.html">&nbsp; Sign Up</a>-->
+<!--    </p>-->
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#user_login_form').submit(function (e) {
+            var userName = document.getElementById("userName").value;
+            var password = document.getElementById("password").value;
+            $.ajax({
+                type: "POST",
+                url:'http://localhost:8080/user?type=signin&userName='+userName+'&password='+password ,
+                success: function (data, status, xhr) {
+
+                    localStorage.setItem("userId", userName);
+                    localStorage.setItem("hospitalId", data.hospitalId);
+                    alert("Login Successful");
+
+                    if(data.userType == "0"){
+                        var userType = "doctor";
+                        localStorage.setItem("userType", userType);
+                        window.location.replace("../html/doctor/doctorDashboard.html");
+                    }else if(data.userType == "1"){
+                        var userType = "director";
+                        localStorage.setItem("userType", userType);
+                        window.location.replace("../html/doctor/doctorDashboard.html");
+                    }else if(data.userType == "moh"){
+                        var userType = "moh";
+                        localStorage.setItem("userType", userType);
+                        window.location.replace("../html/moh/mohDashboard.html");
+                    }else{
+                        var userType = "patient";
+                        localStorage.setItem("userType", userType);
+                        window.location.replace("../html/patient/patientDashboard.html");
+                    }
+
+
+                },
+                error: function (jqXhr, textStatus, errorMessage) {
+                    ajaxErrorHandle(jqXhr);
+                }
+            });
+            var pw = document.getElementById("password").value;
+        });
+    });
+</script>
 </body>
 </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NCMS</title>
+    <link rel="stylesheet" href="../../css/loginTitle.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../jquery/js.cookie-2.2.1.min.js"></script>
+    <script src="../../js/doctor.js"></script>
+    <!--    <script src="../../js/hospital.js"></script>-->
+    <script src="../../jquery/jquery.min.js"></script>
+    <script src="../../jquery/jquery.easing.min.js"></script>
+    <script src="../../toaster/toastr.min.js"></script>
+</head>
+<body>
+
+    <div class="h1">National Covid Management System</div>
+    <div class="ul">
+        <div class="li"><a href="doctorDashboard.html">Home</a></div>
+        <div class="li"><a href="patientDetails.html">Patient</a></div>
+        <div class="li" style="background-color: #18514a"><a href="doctorList.html">Doctor</a></div>
+        <div class="li" style="float:right"><a href="../login.html">LOGOUT</a></div>
+    </div>
+
+    <div class="box">
+        <h1>Doctor Registration</h1>
+        <form name="doctorRegistration" id="doctorRegistration" action="">
+            <table>
+                <tr>
+                    <td width="50%">Full Name</td>
+                    <td><input type="text" name="fullName" id="fullName" placeholder="Enter Your Full Name" required></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="email" id="email" placeholder="Working Email" required></td>
+                </tr>
+                <tr>
+                    <td>Director State</td>
+                    <td>Yes <input type="radio" name="isDirector" id="director" value="1" required style="margin-top: 10px; margin-right: 50px"> No <input type="radio" name="isDirector" id="doctor" value="0" ></td>
+                </tr>
+                <tr>
+                    <center><td align="center"><input type="submit" name="buttonRegister" id="buttonRegister" value="Register" style="width: 90%"></td></center>
+                    <center><td align="center"><input type="reset" value="Clear" style="width: 90%;"></td></center>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        var btnRegister = document.getElementById("buttonRegister");
+        let hospitalId = localStorage.getItem("hospitalId");
+        $(document).ready(function () {
+            $('#doctorRegistration').submit(function (e) {
+                var name = document.getElementById("fullName").value;
+                var email = document.getElementById("email").value;
+                if (document.getElementById("director").checked){
+                    var isDirector = "1";
+                }else {
+                    var isDirector = "0";
+                }
+                registerDoctor(name, hospitalId, isDirector, email);
+
+            });
+        });
+        // btnRegister.onclick = function() {
+        //     var name = document.getElementById("fullName").value;
+        //     var email = document.getElementById("email").value;
+        //     if (document.getElementById("director").checked){
+        //         var isDirector = "1";
+        //     }else {
+        //         var isDirector = "0";
+        //     }
+        //     $(document).ready(function () {
+        //         registerDoctor(name, hospitalId, isDirector, email);
+        //     });
+        //
+        //
+        // }
+    </script>
+
+</body>
+</html>

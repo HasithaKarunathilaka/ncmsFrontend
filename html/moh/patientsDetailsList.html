@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NCMS</title>
+    <link rel="stylesheet" href="../../css/loginTitle.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../jquery/js.cookie-2.2.1.min.js"></script>
+    <script src="../../js/patient.js"></script>
+    <script src="../../jquery/jquery.min.js"></script>
+    <script src="../../jquery/jquery.easing.min.js"></script>
+    <script src="../../toaster/toastr.min.js"></script>
+</head>
+<body>
+    <div class="h1">National Covid Management System</div>
+    <div class="ul">
+        <div class="li"><a href="mohDashboard.html">Home</a></div>
+<!--        <div class="li"><a href="hospitals.html">Hospital</a></div>-->
+<!--        <div class="li"><a href="doctors.html">Doctor</a></div>-->
+        <div class="li" style="background-color: #18514a"><a href="patientsDetailsList.html">Patient</a></div>
+        <div class="li" style="float:right"><a href="../login.html">LOGOUT</a></div>
+    </div>
+
+    <div class="tableBox" style="left: 700px; top: 200px">
+        <h1>Patients Details</h1>
+        <table  id="patientsDetailsList" border="0" >
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Patient ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>District</th>
+                <th>Severity Level</th>
+                <th>State</th>
+<!--                <th>Action</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        let hospitalId = localStorage.getItem("hospitalId");
+        // let doctorId = localStorage.getItem("userId");
+        let accessBy = "moh";
+        $(document).ready(function () {
+            getPatientsDetailsList(accessBy, hospitalId);
+        });
+    </script>
+
+</body>
+</html>

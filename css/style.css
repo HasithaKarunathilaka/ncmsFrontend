@@ -4,7 +4,7 @@ html {
 
 body {
     height: 100%;
-    margin: 0;
+    margin: 0px;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     background-color: #a8feff;
@@ -16,8 +16,8 @@ body {
 .box{
     width: 400px;
     /*height: 420px;*/
-    background: rgba(4, 0, 20, 0.8);
-    color: #fff;
+    background: rgba(5, 1, 26, 0.8);
+    color: #ffffff;
     top: 290px;
     left:50%;
     position: relative;
@@ -27,6 +27,89 @@ body {
     border-radius: 10px;
 
 }
+.tBox{
+    width: max-content;
+    /*height: 420px;*/
+    background: rgba(255, 255, 255, 0.8);
+    color: #000000;
+    top: 290px;
+    left:50%;
+    position: relative;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 20px 20px;
+    border-radius: 10px;
+
+}
+
+.tableBox{
+    width: max-content;
+    /*height: 420px;*/
+    background: rgba(255, 255, 255, 0.8);
+    color: #000000;
+    top: 120px;
+    left: 30%;
+    position: relative;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 20px 20px;
+    border-radius: 10px;
+}
+.patientsDetailsList{
+    width: 100%;
+    border-collapse: collapse;
+    margin-left: 5%;
+}
+.tBox th, td,
+.tableBox th, td{
+    text-align: left;
+    padding: 8px;
+}
+.tBox th,
+.tableBox th{
+    background-color: #18514a;
+    color: #FFFFFF;
+}
+.tBox tr,
+.tableBox tr{
+    background-color: #FFFFFF;
+    color: #030303;
+}
+.tBox tr:hover,
+.tableBox tr:hover{
+    background-color: #d7d7d7;
+    color: #030303;
+}
+.tBox input[type="submit"],
+.tableBox input[type="submit"]{
+    width: 100%;
+    /*margin-top: 30px;*/
+    border: none;
+    outline: none;
+    height: 22px;
+    background: chartreuse;
+    color: #030303;
+    font-size: 14px;
+    border-radius: 5px;
+}
+.tBox input[type="button"],
+.tableBox input[type="button"]{
+    width: 100%;
+    /*margin-top: 30px;*/
+    border: none;
+    outline: none;
+    height: 22px;
+    background: crimson;
+    color: #030303;
+    font-size: 14px;
+    border-radius: 5px;
+}
+.tBox input[type="submit"]:hover, input[type="button"]:hover,
+.tableBox input[type="submit"]:hover, input[type="button"]:hover{
+    cursor: pointer;
+    background: #00fff0;
+    color: #000;
+}
 h1{
     margin: 0;
     padding: 0;
@@ -34,24 +117,31 @@ h1{
     font-size: 22px;
     margin-bottom: 10px;
 }
+/*.box table{*/
+/*    width: 100%;*/
+/*    margin-bottom: 3px;*/
+/*    margin-top: 3px;*/
+/*}*/
+
 .box td{
     margin: 0;
     padding: 0;
     font-weight: bold;
-    color: #fff;
+    color: #ffffff;
 
 }
 .box input[type="text"], input[type="password"], input[type="email"], input[type="number"], select{
-    border: none;
+    border: #00fff0;
     border-bottom: 1px solid #00fff0;
     background: transparent;
     outline: none;
     width: 100%;
     height: 40px;
     margin-bottom: 3px;
-    color: #fff;
+    color: #ffffff;
     font-size: 16px;
 }
+
 .box input[type="submit"], input[type="reset"]{
     width: 80%;
     margin-top: 30px;
@@ -63,13 +153,124 @@ h1{
     font-size: 20px;
     border-radius: 10px;
 }
+#btnUpdate:hover,
 .box input[type="reset"]:hover , input[type="submit"]:hover{
     cursor: pointer;
     background: #00fff0;
     color: #000;
+}
+
+#btnUpdate{
+    background: #18514a;
+    color: #FFFFFF;
 }
 /*.box input[type="submit"]:hover{*/
 /*    cursor: pointer;*/
 /*    background: #00fff0;*/
 /*    color: #000;*/
 /*}*/
+
+/*========================== Pop Up Box =================================*/
+
+.myModalConfirm,
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal select{
+    border: none;
+    border-bottom: 1px solid #000000;
+    background: rgba(255, 255, 255, 0.8);
+    outline: none;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 3px;
+    color: #030303;
+    font-size: 16px;
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 20%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.closeDischarge,
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal select:hover,
+.closeDischarge:hover,
+.closeDischarge:focus,
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 5px;
+    background-color: #709868;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #709868;
+    color: white;
+}
+.modal-footer button{
+    width: 40%;
+    /*margin-top: 30px;*/
+    border: none;
+    outline: none;
+    height: 30px;
+    background: #ffffff;
+    color: #030303;
+    font-size: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.modal-footer button:hover{
+    cursor: pointer;
+    background: #00fff0;
+    color: #000;
+}

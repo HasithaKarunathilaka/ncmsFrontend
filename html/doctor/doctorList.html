@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NCMS</title>
+    <link rel="stylesheet" href="../../css/loginTitle.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../jquery/js.cookie-2.2.1.min.js"></script>
+    <script src="../../js/doctor.js"></script>
+<!--    <script src="../../js/hospital.js"></script>-->
+    <script src="../../jquery/jquery.min.js"></script>
+    <script src="../../jquery/jquery.easing.min.js"></script>
+    <script src="../../toaster/toastr.min.js"></script>
+</head>
+<body>
+<div class="h1">National Covid Management System</div>
+<div class="ul">
+    <div class="li"><a href="doctorDashboard.html">Home</a></div>
+    <div class="li"><a href="patientDetails.html">Patient</a></div>
+    <div class="li" style="background-color: #18514a"><a href="doctorList.html">Doctor</a></div>
+    <div class="li" style="float:right"><a href="../login.html">LOGOUT</a></div>
+</div>
+
+    <center>
+        <div class="tableBox" style="top: 200px; left: 200px">
+            <input type="button" name="btnAddDoctor" id="btnAddDoctor" value="Add Doctor">
+            <h1>Doctor Details</h1>
+            <table  id="doctorDetails">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Id</th>
+                    <th >Name</th>
+                    <th>Position</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </center>
+
+<script type="text/javascript">
+    let hospitalId = localStorage.getItem("hospitalId");
+    let doctorId = localStorage.getItem("userId");
+    let userType = localStorage.getItem("userType");
+    $(document).ready(function () {
+        getDoctorDetails(userType, hospitalId);
+        if(userType == "director"){
+            document.getElementById("btnAddDoctor").style.visibility = 'visible';
+        }else {
+            document.getElementById("btnAddDoctor").style.visibility = 'hidden';
+        }
+    });
+
+    var btnAddDoctor = document.getElementById("btnAddDoctor");
+    btnAddDoctor.onclick = function() {
+        window.location.href="addDoctor.html";
+    }
+
+</script>
+
+</body>
+</html>

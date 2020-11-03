@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../css/loginTitle.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../jquery/js.cookie-2.2.1.min.js"></script>
+    <script src="../../js/queue.js"></script>
+    <script src="../../jquery/jquery.min.js"></script>
+    <script src="../../jquery/jquery.easing.min.js"></script>
+    <script src="../../toaster/toastr.min.js"></script>
+
+    <title>Hospital Registration</title>
+</head>
+<body>
+    <div class="h1">National Covid Management System</div>
+    <div class="ul">
+        <div class="li" style="background-color: #18514a"><a href="mohDashboard.html">Home</a></div>
+<!--        <div class="li"><a href="hospitals.html">Hospital</a></div>-->
+<!--        <div class="li"><a href="doctors.html">Doctor</a></div>-->
+        <div class="li"><a href="patientsDetailsList.html">Patient</a></div>
+        <div class="li" style="float:right"><a href="../login.html">LOGOUT</a></div>
+    </div>
+    <div class="box">
+        <h1>Hospital Registration</h1>
+        <form name="hospitalRegistration" id="hospitalRegistration" action="">
+            <table>
+                <tr>
+                    <td width="45%">Hospital Name</td>
+                    <td><input type="text" name="hospitalName" id="hospitalName" placeholder="Enter Hospital Name" required></td>
+                </tr>
+                <tr>
+                    <td>District</td>
+                    <td><select name="district" id="district" style="color: gray" required>
+                        <option style="background-color: #18514a; color: white">Please Select District</option>
+                        <option style="background-color: #18514a; color: white">D1</option>
+                        <option style="background-color: #18514a; color: white">D2</option>
+                        <option style="background-color: #18514a; color: white">D3</option>
+                        <option style="background-color: #18514a; color: white">D4</option>
+                        <option style="background-color: #18514a; color: white">D5</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>X Coordinate</td>
+                    <td><input type="number" name="xCoordinate" id="xCoordinate" placeholder="X Coordinate of Location" required step="0"></td>
+                </tr>
+                <tr>
+                    <td>Y Coordinate</td>
+                    <td><input type="number" name="yCoordinate" id="yCoordinate" placeholder="Y Coordinate of Location" required></td>
+                </tr>
+                <tr>
+                    <td align="center"><input type="submit" name="buttonRegister" id="buttonRegister" value="Register" style="float:right"></td>
+                    <td align="center"><input type="reset" value="Clear" style="width: 70%;"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#hospitalRegistration').submit(function (e) {
+                var hospitalName = document.getElementById("hospitalName").value;
+                var district = document.getElementById("district").value;
+                var xCoordinate = document.getElementById("xCoordinate").value;
+                var yCoordinate = document.getElementById("yCoordinate").value;
+
+                $.ajax({
+                    type: "POST",
+                    url:'http://localhost:8080/hospital?name='+hospitalName+'&district='+district+'&xCoordinate='+xCoordinate+'&yCoordinate='+yCoordinate ,
+                    success: function (data, status, xhr) {
+                        alert(data.Response);
+                        window.location.replace("mohDashboard.html");
+                    },
+                    error: function (jqXhr, textStatus, errorMessage) {
+                        ajaxErrorHandle(jqXhr);
+                    }
+                });
+                alert("");
+                // var pp = document.getElementById("xCoordinate").value;
+            });
+        });
+    </script>
+
+</body>
+</html>
